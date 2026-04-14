@@ -39,10 +39,10 @@
     justify-content: space-between;
     padding: 0 48px;
     height: 72px;
-    background: rgba(255,255,255,0.96);
+    background: rgba(0,0,0,0.95);
     backdrop-filter: blur(12px);
     border-bottom: 2px solid var(--red);
-    box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.4);
   }
 
   .nav-logo {
@@ -65,7 +65,7 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
     font-size: 22px;
-    color: var(--ntv-blue);
+    color: white;
     letter-spacing: 4px;
     position: relative;
   }
@@ -76,7 +76,7 @@
     bottom: -2px;
     left: 0; right: 0;
     height: 3px;
-    background: var(--ntv-blue);
+    background: white;
     border-radius: 2px;
   }
 
@@ -109,10 +109,18 @@
 
   .hero-bg {
     position: absolute;
+    inset: -20px;
+    background-image: url('ntv-bg.png');
+    background-size: cover;
+    background-position: center top;
+    filter: blur(5px) brightness(1) saturate(0.85);
+    transform: scale(1.08);
+  }
+
+  .hero-overlay {
+    position: absolute;
     inset: 0;
-    background: 
-      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(204,0,0,0.18) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(26,122,191,0.08) 0%, transparent 60%);
+    background: rgba(255,255,255,0.72);
   }
 
   .hero-grid {
@@ -136,12 +144,12 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: rgba(204,0,0,0.15);
-    border: 1px solid rgba(204,0,0,0.4);
+    background: rgba(204,0,0,0.1);
+    border: 1px solid rgba(204,0,0,0.35);
     padding: 6px 20px;
     font-size: 12px;
     font-weight: 700;
-    color: #ff6666;
+    color: var(--red-dark);
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 32px;
@@ -165,7 +173,7 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
     font-size: clamp(52px, 9vw, 110px);
-    color: var(--white);
+    color: var(--black);
     line-height: 0.9;
     letter-spacing: -3px;
     margin-bottom: 8px;
@@ -177,32 +185,23 @@
     display: block;
   }
 
-  .hero-subtitle-line {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin: 24px 0;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
-
   .hero-subtitle-line::before,
   .hero-subtitle-line::after {
     content: '';
     flex: 1;
     max-width: 120px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(204,0,0,0.6));
+    background: linear-gradient(90deg, transparent, rgba(204,0,0,0.4));
   }
 
   .hero-subtitle-line::after {
-    background: linear-gradient(90deg, rgba(204,0,0,0.6), transparent);
+    background: linear-gradient(90deg, rgba(204,0,0,0.4), transparent);
   }
 
   .hero-subtitle {
     font-size: 14px;
     font-weight: 700;
-    color: rgba(255,255,255,0.5);
+    color: rgba(0,0,0,0.4);
     letter-spacing: 3px;
     text-transform: uppercase;
   }
@@ -210,14 +209,16 @@
   .hero-desc {
     font-size: 18px;
     font-weight: 400;
-    color: rgba(255,255,255,0.65);
+    color: rgba(0,0,0,0.55);
     line-height: 1.7;
     max-width: 620px;
     margin: 0 auto 48px;
     animation: fadeUp 0.8s 0.3s ease both;
   }
 
-  .hero-desc strong { color: rgba(255,255,255,0.9); font-weight: 700; }
+  .hero-desc strong { color: var(--black); font-weight: 700; }
+
+  .hero-scroll { display: none; }
 
   .hero-buttons {
     display: flex;
@@ -789,7 +790,12 @@
       padding: 32px 24px;
     }
   }
+  /* ── CALENDLY POPUP CUSTOM BUTTON ── */
+  .calendly-badge-widget { display: none !important; }
 </style>
+<!-- Calendly popup widget -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 <body>
 
@@ -799,15 +805,15 @@
     <span class="tescoma-badge">tescoma.</span>
     <span class="ntv-badge">NTV</span>
   </div>
-  <a href="#solicitar" class="nav-cta">Solicitar Acceso</a>
+  <a href="" onclick="openCalendly(event)" class="nav-cta">Solicitar Acceso</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Nueva plataforma B2B · Lanzamiento 2025</div>
+    <div class="hero-eyebrow">Nueva plataforma B2B · Lanzamiento 2026</div>
     <h1 class="hero-title">
       Portal
       <span>Profesional</span>
@@ -822,7 +828,7 @@
     </p>
     <div class="hero-buttons">
       <a href="#presentacion" class="btn-primary">Ver presentación</a>
-      <a href="#solicitar" class="btn-secondary">Solicitar acceso</a>
+      <a href="" onclick="openCalendly(event)" class="btn-secondary">Solicitar acceso</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -864,7 +870,7 @@
         Tu nueva plataforma de pedidos B2B. Accede al catálogo completo de Tescoma España,
         prepara tus pedidos online y gestiona toda tu documentación desde un único portal profesional.
       </p>
-      <a href="#solicitar" class="btn-primary">Solicitar acceso →</a>
+      <a href="" onclick="openCalendly(event)" class="btn-primary">Solicitar acceso →</a>
     </div>
     <div style="position:relative;">
       <div class="video-label">Presentación · ~30 seg</div>
@@ -965,11 +971,9 @@
       </div>
     </div>
     <div class="cta-action">
-      <a href="mailto:info@tescoma.es?subject=Solicitud%20de%20acceso%20NTV" class="btn-cta-main">
-        Solicitar acceso<br>
-        <small style="font-weight:600;font-size:12px;opacity:0.7;">Recibe tus credenciales</small>
+      <a href="" onclick="openCalendly(event)" class="btn-cta-main">
+        Solicitar acceso
       </a>
-      <small>Acceso gratuito · Disponible por tiempo limitado</small>
     </div>
   </div>
 </div>
@@ -981,10 +985,18 @@
     <span class="ntv-text">NTV</span>
   </div>
   <p>© 2025 Tescoma España, S.L. — Portal Profesional B2B</p>
-  <a href="mailto:info@tescoma.es">info@tescoma.es</a>
+  <a href="/cdn-cgi/l/email-protection#c6afa8a0a986b2a3b5a5a9aba7e8a3b5"><span class="__cf_email__" data-cfemail="056c6b636a45716076666a68642b6076">[email&#160;protected]</span></a>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── CALENDLY ──
+  // SUSTITUYE esta URL por la tuya: https://calendly.com/TU_USUARIO/TU_EVENTO
+  var CALENDLY_URL = 'https://calendly.com/TU_USUARIO/TU_EVENTO';
+
+  function openCalendly(e) {
+    e.preventDefault();
+    Calendly.initPopupWidget({ url: CALENDLY_URL });
+  }
   function loadVideo(placeholder, videoId) {
     if (videoId === 'VIDEO_ID_1' || videoId === 'VIDEO_ID_2' || videoId === 'VIDEO_ID_3') {
       // Vídeo no añadido aún
@@ -1004,16 +1016,4 @@
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.mini-video-card, .video-hero-inner > div').forEach(el => {
-    el.style.cssText += 'opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;';
-    observer.observe(el);
-  });
-</script>
-
-</body>
-</html>
+        e.target.style.transform = 'translateY
